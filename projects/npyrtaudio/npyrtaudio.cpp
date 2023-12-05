@@ -7,7 +7,6 @@
 namespace nb = nanobind;
 using namespace nb::literals;
 
-
 NB_MODULE(npyrtaudio, m)
 {
     m.doc() = "npyrtaudio: a nanobind wrapper around the rtaudio library.";
