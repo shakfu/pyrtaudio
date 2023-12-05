@@ -29,31 +29,9 @@ message(STATUS "Python_VERSION_MAJOR: ${Python_VERSION_MAJOR}")
 message(STATUS "Python_VERSION_MINOR: ${Python_VERSION_MINOR}")
 message(STATUS "Python_VERSION_PATCH: ${Python_VERSION_PATCH}")
 
-# common variables
-
-set(PROJECT_LIB_DIRS ${CMAKE_SOURCE_DIR}/lib)
-set(PROJECT_INCLUDES ${CMAKE_SOURCE_DIR}/include)
-
-
-set(RTAUDIO_DIR
-	${CMAKE_SOURCE_DIR}/include/rtaudio
-)
-
-set(RTAUDIO_SRC
-	${RTAUDIO_DIR}/RtAudio.cpp
-	${RTAUDIO_DIR}/RtAudio.h
-)
-
-set(RTAUDIO_LINK_LIBS
-	"$<$<PLATFORM_ID:Darwin>:-lpthread>"
-	"$<$<PLATFORM_ID:Darwin>:-framework CoreFoundation>"
-	"$<$<PLATFORM_ID:Darwin>:-framework CoreAudio>"
-)
-set(RTAUDIO_COMPILE_DEFS
-	$<$<PLATFORM_ID:Darwin>:__MACOSX_CORE__>
-)
 
 if(Python_FOUND)
+	add_subdirectory(rtaudio)
 	add_subdirectory(cyrtaudio)
 	add_subdirectory(pyrtaudio)
 	add_subdirectory(npyrtaudio)

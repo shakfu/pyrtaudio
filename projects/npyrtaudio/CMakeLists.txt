@@ -17,14 +17,14 @@ find_package(nanobind REQUIRED)
 
 nanobind_add_module(
     ${PROJECT_NAME}
-    ${RTAUDIO_SRC}
+    $<IF:$<BOOL:${USE_STATICLIB}>,,${RTAUDIO_SRC}>
     npyrtaudio.cpp
 )
 
 target_compile_definitions(
     ${PROJECT_NAME}
     PUBLIC
-    __MACOSX_CORE__
+    ${RTAUDIO_COMPILE_DEFS}
 )
 
 target_include_directories(
@@ -42,8 +42,6 @@ target_link_directories(
 target_link_libraries(
     ${PROJECT_NAME}
     PUBLIC
-    pthread
-    "-framework CoreFoundation"
-    "-framework CoreAudio"
-    # ${NPYRTAUDIO_LIB}/librtaudio.a
+    ${RTAUDIO_LINK_LIBS}
+    $<$<BOOL:${USE_STATICLIB}>:rtaudio>
 )

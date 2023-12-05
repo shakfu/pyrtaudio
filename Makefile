@@ -7,11 +7,11 @@ RTAUDIO_STATICLIB := ./lib/librtaudio.a
 all: cmake
 
 cmake:
-	@rm -f projects/cyrtaudio/cyrtaudio.cpp
 	@mkdir -p build && cd build && cmake .. && make
 
 test:
 	@echo "testing"
+	@mkdir -p build && cd build && cmake .. -DBUILD_TESTS=1 && make
 
 clean:
 	@rm -rf build

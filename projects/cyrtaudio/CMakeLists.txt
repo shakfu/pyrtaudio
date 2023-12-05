@@ -6,7 +6,7 @@ set(PROJECT_PYX ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_PYX})
 add_library( 
     ${PROJECT_NAME} 
     MODULE
-    ${RTAUDIO_SRC}
+    $<IF:$<BOOL:${USE_STATICLIB}>,,${RTAUDIO_SRC}>
     ${PROJECT_SRC}
 )
 
@@ -85,7 +85,7 @@ target_link_libraries(
     ${Python_LIBRARIES}
     "$<$<PLATFORM_ID:Darwin>:-ldl>"
     ${RTAUDIO_LINK_LIBS}
-    ${FAUST_STATICLIB}
+    $<$<BOOL:${USE_STATICLIB}>:rtaudio>
 )
 
 

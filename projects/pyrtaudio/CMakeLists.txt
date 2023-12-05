@@ -15,14 +15,14 @@ find_package(pybind11 CONFIG REQUIRED)
 
 pybind11_add_module(
     ${PROJECT_NAME}
-    ${RTAUDIO_SRC}
+    $<IF:$<BOOL:${USE_STATICLIB}>,,${RTAUDIO_SRC}>
     pyrtaudio.cpp
 )
 
 target_compile_definitions(
     ${PROJECT_NAME}
     PUBLIC
-    __MACOSX_CORE__
+    ${RTAUDIO_COMPILE_DEFS}
 )
 
 target_include_directories(
@@ -40,7 +40,6 @@ target_link_directories(
 target_link_libraries(
     ${PROJECT_NAME}
     PUBLIC
-    pthread
-    "-framework CoreAudio"
-    # ${PYRTAUDIO_LIB}/librtaudio.a
+    ${RTAUDIO_LINK_LIBS}
+    $<$<BOOL:${USE_STATICLIB}>:rtaudio>
 )

@@ -1,32 +1,22 @@
-include_directories(..)
-if (WIN32)
-    include_directories(../include)
-endif (WIN32)
 
-list(GET LIB_TARGETS 0 LIBRTAUDIO)
+function(add_rtaudio_test)
+    set(name ${ARGV0})
+    message("name: ${name}")
+    add_executable(${name} ${name}.cpp)
+    add_dependencies(${name} rtaudio)
+    target_include_directories(${name} PUBLIC ${PROJECT_INCLUDES})
+    target_link_directories(${name} PUBLIC ${PROJECT_LIB_DIRS})
+    target_link_libraries(${name} PUBLIC rtaudio ${RTAUDIO_LINK_LIBS})
+endfunction()
 
-add_executable(audioprobe audioprobe.cpp)
-target_link_libraries(audioprobe ${LIBRTAUDIO} ${LINKLIBS})
 
-add_executable(playsaw playsaw.cpp)
-target_link_libraries(playsaw ${LIBRTAUDIO} ${LINKLIBS})
+add_rtaudio_test(audioprobe)
+add_rtaudio_test(playsaw)
+add_rtaudio_test(playraw)
+add_rtaudio_test(record)
+add_rtaudio_test(duplex)
+add_rtaudio_test(apinames)
+add_rtaudio_test(testall)
+add_rtaudio_test(teststops)
 
-add_executable(playraw playraw.cpp)
-target_link_libraries(playraw ${LIBRTAUDIO} ${LINKLIBS})
-
-add_executable(record record.cpp)
-target_link_libraries(record ${LIBRTAUDIO} ${LINKLIBS})
-
-add_executable(duplex duplex.cpp)
-target_link_libraries(duplex ${LIBRTAUDIO} ${LINKLIBS})
-
-add_executable(apinames apinames.cpp)
-target_link_libraries(apinames ${LIBRTAUDIO} ${LINKLIBS})
-
-add_executable(testall testall.cpp)
-target_link_libraries(testall ${LIBRTAUDIO} ${LINKLIBS})
-
-add_executable(teststops teststops.cpp)
-target_link_libraries(teststops ${LIBRTAUDIO} ${LINKLIBS})
-
-add_test(NAME apinames COMMAND apinames)
+# add_test(NAME apinames COMMAND apinames)
