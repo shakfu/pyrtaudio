@@ -1,7 +1,13 @@
-# pyrtaudio / npyrtaudio
+# python-rtaudio
 
 
-Contains two almost identical experimental wrappers of RtAudio using pybind11 and nanobind
+Contains three almost identical experimental wrappers of RtAudio:
+
+- cyrtaudio  - cython
+
+- npyrtaudio - nanobind
+
+- pyrtaudio  - pybind11
 
 
 ## To build
@@ -9,12 +15,12 @@ Contains two almost identical experimental wrappers of RtAudio using pybind11 an
 
 ```bash
 
-pip install pybind11 nanobind
+pip install cython pybind11 nanobind
 
 ```
 
 
-then 
+then
 
 
 ```bash

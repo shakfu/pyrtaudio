@@ -135,5 +135,5 @@ cdef extern from "rtaudio/RtAudio.h":
         long getStreamLatency()
         unsigned int getStreamSampleRate()
         # void setErrorCallback( RtAudioErrorCallback errorCallback )
-        void showWarnings( bint value = true )
+        void showWarnings(bint value)
 
