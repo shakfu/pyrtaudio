@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.18)
 
-project(pyrtaudio_project)
+project(python_rtaudio_project)
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
