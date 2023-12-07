@@ -10,6 +10,11 @@ add_library(
     ${PROJECT_SRC}
 )
 
+add_dependencies(
+    ${PROJECT_NAME}
+    rtaudio
+)
+
 add_custom_command(
     OUTPUT ${PROJECT_SRC}
     COMMAND cythonize -3 ${PROJECT_PYX}

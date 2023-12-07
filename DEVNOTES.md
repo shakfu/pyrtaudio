@@ -14,5 +14,3 @@ cython can't handle `std::function` directly, here are some links to workarounds
 
 - https://stackoverflow.com/questions/21242160/how-to-build-a-cython-wrapper-for-c-function-with-stl-list-parameter
 
-
-

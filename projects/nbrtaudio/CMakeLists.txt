@@ -1,4 +1,4 @@
-set(PROJECT_NAME npyrtaudio)
+set(PROJECT_NAME nbrtaudio)
 
 # Detect the installed nanobind package and import it into CMake
 execute_process(
@@ -8,8 +8,8 @@ list(APPEND CMAKE_PREFIX_PATH "${NB_DIR}")
 find_package(nanobind CONFIG REQUIRED)
 
 
-set(NPYRTAUDIO_LIB ${CMAKE_SOURCE_DIR}/lib)
-set(NPYRTAUDIO_INCLUDE ${CMAKE_SOURCE_DIR}/include)
+set(NBRTAUDIO_LIB ${CMAKE_SOURCE_DIR}/lib)
+set(NBRTAUDIO_INCLUDE ${CMAKE_SOURCE_DIR}/include)
 
 
 find_package(nanobind REQUIRED)
@@ -18,7 +18,12 @@ find_package(nanobind REQUIRED)
 nanobind_add_module(
     ${PROJECT_NAME}
     $<IF:$<BOOL:${USE_STATICLIB}>,,${RTAUDIO_SRC}>
-    npyrtaudio.cpp
+    nbrtaudio.cpp
+)
+
+add_dependencies(
+    ${PROJECT_NAME}
+    rtaudio
 )
 
 target_compile_definitions(
@@ -30,13 +35,13 @@ target_compile_definitions(
 target_include_directories(
     ${PROJECT_NAME}
     PUBLIC
-    ${NPYRTAUDIO_INCLUDE}/rtaudio
+    ${NBRTAUDIO_INCLUDE}/rtaudio
 )
 
 target_link_directories(
     ${PROJECT_NAME}
     PUBLIC
-    ${NPYRTAUDIO_LIB}
+    ${NBRTAUDIO_LIB}
 )
 
 target_link_libraries(

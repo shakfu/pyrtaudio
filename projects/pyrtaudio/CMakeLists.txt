@@ -1,45 +1,81 @@
 set(PROJECT_NAME pyrtaudio)
 
-set(PYRTAUDIO_LIB ${CMAKE_SOURCE_DIR}/lib)
-set(PYRTAUDIO_INCLUDE ${CMAKE_SOURCE_DIR}/include)
+set(PROJECT_SRC ${CMAKE_CURRENT_SOURCE_DIR}/rtaudiomodule.cpp)
+set(PROJECT_PYX ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_PYX})
 
-# Detect the installed pybind11 package and import it into CMake
-execute_process(
-    COMMAND "${Python_EXECUTABLE}" -m pybind11 --cmakedir
-    OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE PB_DIR)
-list(APPEND CMAKE_PREFIX_PATH "${PB_DIR}")
-find_package(pybind11 CONFIG REQUIRED)
-
-# find_package(pybind11 REQUIRED)
-
-
-pybind11_add_module(
-    ${PROJECT_NAME}
+add_library( 
+    ${PROJECT_NAME} 
+    MODULE
     $<IF:$<BOOL:${USE_STATICLIB}>,,${RTAUDIO_SRC}>
-    pyrtaudio.cpp
+    ${PROJECT_SRC}
+)
+
+add_dependencies(
+    ${PROJECT_NAME}
+    rtaudio
+)
+
+string(TOLOWER ${CMAKE_SYSTEM_NAME} platform)
+set(MODULE_NAME "rtaudio")
+set_target_properties(
+    ${PROJECT_NAME}
+    PROPERTIES
+    PREFIX ""
+    LIBRARY_OUTPUT_NAME "${MODULE_NAME}.cpython-${Python_VERSION_MAJOR}${Python_VERSION_MINOR}-${platform}"
+)
+    
+target_include_directories(
+    ${PROJECT_NAME}
+    PUBLIC
+    ${Python_INCLUDE_DIRS}
+    ${PROJECT_INCLUDES}/
+    ${PROJECT_INCLUDES}/rtaudio
 )
 
 target_compile_definitions(
     ${PROJECT_NAME}
     PUBLIC
     ${RTAUDIO_COMPILE_DEFS}
+    -DNDEBUG
 )
 
-target_include_directories(
+target_compile_options(
     ${PROJECT_NAME}
     PUBLIC
-    ${PYRTAUDIO_INCLUDE}/rtaudio
+    -std=c++11 
+    $<$<PLATFORM_ID:Darwin>:-Wno-unused-result>
+    $<$<PLATFORM_ID:Darwin>:-Wsign-compare>
+    $<$<PLATFORM_ID:Darwin>:-Wunreachable-code>
+    $<$<PLATFORM_ID:Darwin>:-fno-common>
+    $<$<PLATFORM_ID:Darwin>:-Wall>  
+    $<$<PLATFORM_ID:Darwin>:-g>
+    $<$<PLATFORM_ID:Darwin>:-fwrapv>
+    $<$<PLATFORM_ID:Darwin>:-O3>
+    $<$<PLATFORM_ID:Windows>:/O2>
+    $<$<PLATFORM_ID:Windows>:/MD> # api module works with this
+)
+
+target_link_options(
+    ${PROJECT_NAME}
+    PUBLIC
+    $<$<PLATFORM_ID:Darwin>:-dynamic>
 )
 
 target_link_directories(
-    ${PROJECT_NAME}
+    ${PROJECT_NAME} 
     PUBLIC
-    ${PYRTAUDIO_LIB}
+    ${Python_LIBRARY_DIRS}
+    ${PROJECT_LIB_DIRS}
 )
 
 target_link_libraries(
-    ${PROJECT_NAME}
+    ${PROJECT_NAME} 
     PUBLIC
+    ${Python_LIBRARIES}
+    "$<$<PLATFORM_ID:Darwin>:-ldl>"
     ${RTAUDIO_LINK_LIBS}
     $<$<BOOL:${USE_STATICLIB}>:rtaudio>
 )
+
+
+

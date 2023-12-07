@@ -33,8 +33,9 @@ message(STATUS "Python_VERSION_PATCH: ${Python_VERSION_PATCH}")
 if(Python_FOUND)
 	add_subdirectory(rtaudio)
 	add_subdirectory(cyrtaudio)
+	add_subdirectory(nbrtaudio)
+	add_subdirectory(pbrtaudio)
 	add_subdirectory(pyrtaudio)
-	add_subdirectory(npyrtaudio)
 endif()
 
 

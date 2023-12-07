@@ -7,9 +7,9 @@
 namespace py = pybind11;
 
 
-PYBIND11_MODULE(pyrtaudio, m)
+PYBIND11_MODULE(pbrtaudio, m)
 {
-    m.doc() = "pyrtaudio: a pybind11 wrapper around the rtaudio library.";
+    m.doc() = "pbrtaudio: a pybind11 wrapper around the rtaudio library.";
     m.attr("__version__") = "0.0.1";
 
     // -----------------------------------------------------------------------
