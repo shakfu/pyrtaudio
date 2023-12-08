@@ -45,6 +45,8 @@ Abort trap: 6
 
 ## Handling Thread Safety
 
+- https://pythoncapi.readthedocs.io/type_object.html
+
 - https://pythondev.readthedocs.io/debug_tools.html
 
 - https://docs.python.org/3/c-api/init.html#thread-state-and-the-global-interpreter-lock
