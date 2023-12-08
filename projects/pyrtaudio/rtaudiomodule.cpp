@@ -6,22 +6,31 @@
 extern "C" {
 
 typedef struct {
-    PyObject_HEAD RtAudio* dac;
+    PyObject_HEAD
+    RtAudio* dac;
 } PyRtAudio;
 
 
 static void RtAudio_dealloc(PyRtAudio* self)
 {
     printf("RtAudio_dealloc: start.\n");
-    if (self == NULL)
+    if (self == NULL) {
+        printf("RtAudio_dealloc: self==NULL.\n");
         return;
-
-    if (self->dac) {
-        if (self->dac->isStreamOpen())
-            self->dac->closeStream();
-        delete self->dac;
     }
 
+    if (self->dac) {
+        printf("RtAudio_dealloc: self->dac\n");
+        if (self->dac->isStreamOpen()) {
+            printf("RtAudio_dealloc: isStreamOpen -> closeStream\n");
+            self->dac->closeStream();
+        }
+        printf("RtAudio_dealloc: pre:  delete self->dac\n");
+        delete self->dac;
+        self->dac = NULL;
+        printf("RtAudio_dealloc: post: delete self->dac\n");
+    }
+    printf("RtAudio_dealloc: pre: Py_TYPE(self)->tp_free((PyObject*)self)\n");
     Py_TYPE(self)->tp_free((PyObject*)self);
     printf("RtAudio_dealloc: end.\n");
 }
@@ -45,10 +54,14 @@ static PyObject* RtAudio_new(PyTypeObject* type, PyObject* args, PyObject* kwds)
 
     self->dac = NULL;
 
-    if (api == NULL)
+    if (api == NULL) {
+        printf("RtAudio_new: api==NULL.\n");
         self->dac = new RtAudio;
-    else if (!strcmp(api, "core"))
+    }
+    else if (!strcmp(api, "core")) {
+        printf("RtAudio_new: api==core.\n");
         self->dac = new RtAudio(RtAudio::MACOSX_CORE);
+    }
 
     if (self->dac == NULL) {
         Py_XDECREF(self);
@@ -102,7 +115,7 @@ PyMODINIT_FUNC PyInit_rtaudio(void)
 
 
     if (PyModule_AddObjectRef(module, "RtAudio", (PyObject*)&RtAudio_type)< 0) {
-        Py_DECREF(module);
+        Py_XDECREF(module);
         return NULL;
     }
 
