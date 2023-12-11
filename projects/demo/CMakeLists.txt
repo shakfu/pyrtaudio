@@ -1,6 +1,6 @@
-set(PROJECT_NAME rtest)
+set(PROJECT_NAME demo)
 
-set(PROJECT_SRC ${CMAKE_CURRENT_SOURCE_DIR}/rtestmodule.cpp)
+set(PROJECT_SRC ${CMAKE_CURRENT_SOURCE_DIR}/demomodule.cpp)
 set(PROJECT_PYX ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_PYX})
 
 add_library( 
@@ -16,7 +16,7 @@ add_dependencies(
 )
 
 string(TOLOWER ${CMAKE_SYSTEM_NAME} platform)
-set(MODULE_NAME "rtest")
+set(MODULE_NAME "demo")
 set_target_properties(
     ${PROJECT_NAME}
     PROPERTIES

@@ -102,19 +102,26 @@ $ ../configure --with-pydebug --prefix=$HOME/projects/python-rtaudio/python
 $ make install EXTRA_CFLAGS="-DPy_DEBUG"
 ```
 
+## debug python
+
+- https://pythondev.readthedocs.io/debug_tools.html
+
+
+## type extension
+
+- https://pythoncapi.readthedocs.io/type_object.html
+
+- https://github.com/python/cpython/blob/main/Modules/zlibmodule.c
+
+
+- https://geghamjivanyan.medium.com/c-c-extension-for-python-f68444dab472
 
 
 ## Handling Thread Safety
 
-- https://pythoncapi.readthedocs.io/type_object.html
-
-- https://pythondev.readthedocs.io/debug_tools.html
-
 - https://docs.python.org/3/c-api/init.html#thread-state-and-the-global-interpreter-lock
 
 - https://docs.python.org/3/extending/newtypes_tutorial.html
-
-- https://github.com/python/cpython/blob/main/Modules/zlibmodule.c
 
 - https://pythonextensionpatterns.readthedocs.io/en/latest/thread_safety.html
 
