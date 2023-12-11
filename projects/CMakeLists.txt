@@ -41,6 +41,7 @@ endif()
 
 if(Python_FOUND)
 	add_subdirectory(demo)
+	add_subdirectory(cppext)
 	add_subdirectory(custom)
 	add_subdirectory(rtaudio)
 	add_subdirectory(cyrtaudio)
