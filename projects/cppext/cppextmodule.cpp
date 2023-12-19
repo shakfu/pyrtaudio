@@ -130,20 +130,6 @@ static PyType_Slot MyClass_slots[] = {
 };
 
 
-// static PyType_Spec spec_myclass = {
-//     .ob_base = PyVarObject_HEAD_INIT(NULL, 0).tp_name = "rtest.Demo",
-//     .tp_doc = PyDoc_STR("Audio input device"),
-//     .tp_basicsize = sizeof(Demo) + sizeof(Demo),
-//     .tp_itemsize = 0,
-//     .tp_flags = Py_TPFLAGS_DEFAULT,
-//     .tp_new = Demo_new,
-//     .tp_init = (initproc)Demo_init,
-//     .tp_dealloc = (destructor)Demo_dealloc,
-//     .tp_members = 0,
-//     .tp_methods = 0,
-// };
-
-
 static PyType_Spec spec_myclass = {
     "MyClass",                                // name
     sizeof(MyClassObject) + sizeof(MyClass),  // basicsize
