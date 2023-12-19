@@ -7,7 +7,11 @@ Contains three almost identical experimental wrappers of [RtAudio](https://githu
 
 - npyrtaudio - nanobind
 
-- pyrtaudio  - pybind11
+- pbrtaudio  - pybind11
+
+
+Next on the list is to add RtMidi](https://github.com/thestk/rtmidi) support.
+
 
 
 ## To build

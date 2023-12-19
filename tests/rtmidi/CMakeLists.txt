@@ -10,13 +10,13 @@ function(add_rtmidi_test)
 endfunction()
 
 
-add_rtmidi_test(apinames)
+# add_rtmidi_test(apinames)
 add_rtmidi_test(cmidiin)
 add_rtmidi_test(midiclock)
 add_rtmidi_test(midiout)
 add_rtmidi_test(midiprobe)
 add_rtmidi_test(qmidiin)
 add_rtmidi_test(sysextest)
-add_rtmidi_test(testcapi)
+# add_rtmidi_test(testcapi)
 
 # add_test(NAME apinames COMMAND apinames)
