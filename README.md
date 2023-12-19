@@ -10,7 +10,7 @@ Contains three almost identical experimental wrappers of [RtAudio](https://githu
 - pbrtaudio  - pybind11
 
 
-Next on the list is to add RtMidi](https://github.com/thestk/rtmidi) support.
+Next on the list is to add [RtMidi](https://github.com/thestk/rtmidi) support.
 
 
 
